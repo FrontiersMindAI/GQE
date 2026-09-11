@@ -1,10 +1,6 @@
 ## Grouped Query Experts
 
-Self-attention is central to Transformer performance and is often the most expensive part of the Transformer at long context lengths, because its pairwise token interactions scale quadratically with sequence length. Standard dense attention also applies the same set of attention
-heads to every token regardless of token difficulty or information content. This uniform activation can waste compute, especially as sequences grow longer and attention cost increases rapidly. We propose Grouped Query Experts (GQE), a mixture-of-experts layer on top of grouped-query
-attention (GQA): within each GQA group, a router selects k query-head experts per token while all key–value (KV) heads remain dense and unchanged. Thus GQE keeps the KV-cache benefits of GQA and reduces only the active query-head computation. On a fixed 30B-token budget at
-the 250M-parameter scale, GQE matches the all-active GQA baseline in downstream accuracy while activating half of the routed query-head experts per token, and achieves 1.7–1.8× prefill speedup at long context length.
-
+Self-attention is a major bottleneck in Transformers at long context lengths because its compute grows quadratically with sequence length. We propose Grouped Query Experts (GQE), a mixture-of-experts layer built on grouped-query attention (GQA). For each token, a router selects only k query-head experts within each GQA group, while keeping all key–value (KV) heads dense and unchanged. This preserves GQA’s KV-cache benefits while reducing query-head computation. At the 250M-parameter scale, GQE matches standard GQA accuracy on a fixed 30B-token training budget while activating only half of the query-head experts, achieving 1.7–1.8× faster prefill at long context lengths.
 
 ![GQE](./gqe.png)
 
