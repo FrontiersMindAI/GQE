@@ -1,0 +1,118 @@
+[project]
+name = "gqe"
+version = "1.0.0"
+description = "Grouped Query Experts: Mixture-of-Experts on GQA Self-Attention"
+authors = [
+    { name = "Vishesh Tripathi" },
+    { name = "Abhay Kumar" },
+    { name = "FrontiersMind" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+keywords = [
+    "artificial intelligence",
+    "transformers",
+    "mixture of experts",
+    "attention",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "torch>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/FrontiersMindAI/GQE"
+Repository = "https://github.com/FrontiersMindAI/GQE"
+Paper = "https://arxiv.org/abs/2606.20945"
+
+[project.optional-dependencies]
+lightning = [
+    "lightning>=2.0.0",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+test-lightning = [
+    "pytest",
+    "pytest-cov",
+    "lightning>=2.0.0",
+]
+dev = [
+    "black",
+    "flake8",
+    "mypy",
+    "pytest",
+    "pytest-cov",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+pythonpath = [
+    ".",
+]
+addopts = [
+    "--color=yes",
+    "--durations=0",
+    "--strict-markers",
+    "--doctest-modules",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]
+log_cli = "True"
+markers = [
+    "slow: slow tests",
+    "lightning: tests that require PyTorch Lightning",
+]
+minversion = "6.0"
+testpaths = "tests/"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["gqe"]
+
+[tool.hatch.envs.test]
+dependencies = [
+    "pytest",
+    "pytest-cov",
+]
+
+[tool.hatch.envs.test-lightning]
+dependencies = [
+    "pytest",
+    "pytest-cov",
+    "lightning>=2.0.0",
+]
+
+[tool.hatch.envs.test.scripts]
+default = "pytest tests/ -v -k 'not lightning'"
+all = "pytest tests/ -v"
+cov = "pytest tests/ -v --cov=gqe --cov-report=term-missing"
+
+[tool.hatch.envs.test-lightning.scripts]
+default = "pytest tests/ -v"
+lightning = "pytest tests/test_gqe_lightning_callback.py -v"
+all = "pytest tests/ -v"
+cov = "pytest tests/ -v --cov=gqe --cov-report=term-missing"
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: nocover",
+    "raise NotImplementedError",
+    "raise NotImplementedError()",
+    "if __name__ == .__main__.:",
+]
