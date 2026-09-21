@@ -102,15 +102,6 @@ GQEAttention(..., variant="gqe")              # full method
 
 ---
 
-## Testing
-
-```bash
-./run_tests.sh
-./run_tests.sh lightning
-```
-
----
-
 ## Citation
 
 ```bibtex

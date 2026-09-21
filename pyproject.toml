@@ -36,83 +36,13 @@ Paper = "https://arxiv.org/abs/2606.20945"
 lightning = [
     "lightning>=2.0.0",
 ]
-test = [
-    "pytest",
-    "pytest-cov",
-]
-test-lightning = [
-    "pytest",
-    "pytest-cov",
-    "lightning>=2.0.0",
-]
-dev = [
-    "black",
-    "flake8",
-    "mypy",
-    "pytest",
-    "pytest-cov",
-]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.pytest.ini_options]
-pythonpath = [
-    ".",
-]
-addopts = [
-    "--color=yes",
-    "--durations=0",
-    "--strict-markers",
-    "--doctest-modules",
-]
-filterwarnings = [
-    "ignore::DeprecationWarning",
-    "ignore::UserWarning",
-]
-log_cli = "True"
-markers = [
-    "slow: slow tests",
-    "lightning: tests that require PyTorch Lightning",
-]
-minversion = "6.0"
-testpaths = "tests/"
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["gqe"]
-
-[tool.hatch.envs.test]
-dependencies = [
-    "pytest",
-    "pytest-cov",
-]
-
-[tool.hatch.envs.test-lightning]
-dependencies = [
-    "pytest",
-    "pytest-cov",
-    "lightning>=2.0.0",
-]
-
-[tool.hatch.envs.test.scripts]
-default = "pytest tests/ -v -k 'not lightning'"
-all = "pytest tests/ -v"
-cov = "pytest tests/ -v --cov=gqe --cov-report=term-missing"
-
-[tool.hatch.envs.test-lightning.scripts]
-default = "pytest tests/ -v"
-lightning = "pytest tests/test_gqe_lightning_callback.py -v"
-all = "pytest tests/ -v"
-cov = "pytest tests/ -v --cov=gqe --cov-report=term-missing"
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: nocover",
-    "raise NotImplementedError",
-    "raise NotImplementedError()",
-    "if __name__ == .__main__.:",
-]
