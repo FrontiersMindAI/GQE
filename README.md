@@ -8,8 +8,6 @@ Official PyTorch implementation of our paper:
 
 FrontiersMind
 
-[Paper](https://arxiv.org/abs/2606.20945)
-
 ---
 
 ## 🚀 Installation
