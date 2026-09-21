@@ -4,10 +4,6 @@ Official PyTorch implementation of our paper:
 
 **[Grouped Query Experts: Mixture-of-Experts on GQA Self-Attention](https://arxiv.org/abs/2606.20945)**
 
-[Vishesh Tripathi](https://github.com/FrontiersMindAI), [Abhay Kumar](https://www.linkedin.com/in/akanyaani/)
-
-FrontiersMind
-
 ---
 
 ## 🚀 Installation
