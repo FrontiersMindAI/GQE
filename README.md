@@ -29,7 +29,6 @@ Grouped Query Experts (GQE) is a mixture-of-experts layer on top of grouped-quer
 The default configuration matches the paper’s main setting:
 
 - Softmax over experts **inside each GQA group**, then top-k selection
-- A **renormalized weighted-sum slot** so the language-modeling loss trains the router
 - An **always-on shared query head** that anchors training
 - A Switch-style **load-balancing auxiliary loss**
 
